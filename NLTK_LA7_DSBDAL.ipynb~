@@ -1,0 +1,359 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "3e28cd3c",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2023-05-27T04:39:45.832324400Z",
+     "start_time": "2023-05-27T04:39:45.812899Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "#Import NLTK\n",
+    "#Before preprocessing, we need to first download the NLTK library."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "58f86623",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2023-05-27T04:39:48.113219100Z",
+     "start_time": "2023-05-27T04:39:45.834633800Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Defaulting to user installation because normal site-packages is not writeable\n",
+      "Requirement already satisfied: nltk in c:\\users\\magar\\appdata\\roaming\\python\\python310\\site-packages (3.8.1)\n",
+      "Requirement already satisfied: click in c:\\users\\magar\\appdata\\roaming\\python\\python310\\site-packages (from nltk) (8.1.3)\n",
+      "Requirement already satisfied: joblib in c:\\users\\magar\\appdata\\roaming\\python\\python310\\site-packages (from nltk) (1.2.0)\n",
+      "Requirement already satisfied: regex>=2021.8.3 in c:\\users\\magar\\appdata\\roaming\\python\\python310\\site-packages (from nltk) (2023.5.5)\n",
+      "Requirement already satisfied: tqdm in c:\\users\\magar\\appdata\\roaming\\python\\python310\\site-packages (from nltk) (4.65.0)\n",
+      "Requirement already satisfied: colorama in c:\\users\\magar\\appdata\\roaming\\python\\python310\\site-packages (from click->nltk) (0.4.4)\n",
+      "Note: you may need to restart the kernel to use updated packages.\n"
+     ]
+    }
+   ],
+   "source": [
+    "pip install nltk"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "2c8c2daa",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2023-05-27T04:39:48.204412600Z",
+     "start_time": "2023-05-27T04:39:48.116518Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "it is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.\n"
+     ]
+    }
+   ],
+   "source": [
+    "#Give Input as ant test\n",
+    "\n",
+    "text = \"It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.\"\n",
+    "text = text.lower()\n",
+    "print(text)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "223076d9",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2023-05-27T04:39:48.218487100Z",
+     "start_time": "2023-05-27T04:39:48.130466500Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\n"
+     ]
+    }
+   ],
+   "source": [
+    "import string\n",
+    "print(string.punctuation)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "aa957aab",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2023-05-27T04:39:48.219489900Z",
+     "start_time": "2023-05-27T04:39:48.146801900Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "it is a truth universally acknowledged that a single man in possession of a good fortune must be in want of a wife\n"
+     ]
+    }
+   ],
+   "source": [
+    "text_p = \"\".join([char for char in text if char not in string.punctuation])\n",
+    "print(text_p)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "0878415d",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2023-05-27T04:39:48.219489900Z",
+     "start_time": "2023-05-27T04:39:48.162901Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "#Tokenization\n",
+    "#Strings can be tokenized into tokens via nltk.word_tokenize.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "b149f12c",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2023-05-27T04:39:52.305045400Z",
+     "start_time": "2023-05-27T04:39:48.177799300Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['it', 'is', 'a', 'truth', 'universally', 'acknowledged', 'that', 'a', 'single', 'man', 'in', 'possession', 'of', 'a', 'good', 'fortune', 'must', 'be', 'in', 'want', 'of', 'a', 'wife']\n",
+      "['it is a truth universally acknowledged that a single man in possession of a good fortune must be in want of a wife']\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "[nltk_data] Error loading punkt: <urlopen error [Errno 11001]\n",
+      "[nltk_data]     getaddrinfo failed>\n"
+     ]
+    }
+   ],
+   "source": [
+    "\n",
+    "import nltk\n",
+    "nltk.download('punkt')\n",
+    "\n",
+    "from nltk import word_tokenize\n",
+    "from nltk import sent_tokenize\n",
+    "words = word_tokenize(text_p)\n",
+    "words1 = sent_tokenize(text_p)\n",
+    "\n",
+    "print(words)\n",
+    "print(words1)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "c8eabb77",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2023-05-27T04:39:52.383210600Z",
+     "start_time": "2023-05-27T04:39:52.315751500Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', \"you're\", \"you've\", \"you'll\", \"you'd\", 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', \"she's\", 'her', 'hers', 'herself', 'it', \"it's\", 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which', 'who', 'whom', 'this', 'that', \"that'll\", 'these', 'those', 'am', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until', 'while', 'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 's', 't', 'can', 'will', 'just', 'don', \"don't\", 'should', \"should've\", 'now', 'd', 'll', 'm', 'o', 're', 've', 'y', 'ain', 'aren', \"aren't\", 'couldn', \"couldn't\", 'didn', \"didn't\", 'doesn', \"doesn't\", 'hadn', \"hadn't\", 'hasn', \"hasn't\", 'haven', \"haven't\", 'isn', \"isn't\", 'ma', 'mightn', \"mightn't\", 'mustn', \"mustn't\", 'needn', \"needn't\", 'shan', \"shan't\", 'shouldn', \"shouldn't\", 'wasn', \"wasn't\", 'weren', \"weren't\", 'won', \"won't\", 'wouldn', \"wouldn't\"]\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "[nltk_data] Error loading stopwords: <urlopen error [Errno 11001]\n",
+      "[nltk_data]     getaddrinfo failed>\n"
+     ]
+    }
+   ],
+   "source": [
+    "nltk.download('stopwords')\n",
+    "\n",
+    "from nltk.corpus import stopwords\n",
+    "stop_words = stopwords.words('english')\n",
+    "print(stop_words)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "5193a3cf",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2023-05-27T04:39:52.384210600Z",
+     "start_time": "2023-05-27T04:39:52.336626800Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['truth', 'universally', 'acknowledged', 'single', 'man', 'possession', 'good', 'fortune', 'must', 'want', 'wife']\n"
+     ]
+    }
+   ],
+   "source": [
+    "filtered_words = [word for word in words if word not in stop_words]\n",
+    "print(filtered_words)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "ea2b08b8",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2023-05-27T04:39:52.384210600Z",
+     "start_time": "2023-05-27T04:39:52.354983400Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['truth', 'univers', 'acknowledg', 'singl', 'man', 'possess', 'good', 'fortun', 'must', 'want', 'wife']\n"
+     ]
+    }
+   ],
+   "source": [
+    "from nltk.stem.porter import PorterStemmer\n",
+    "porter = PorterStemmer()\n",
+    "stemmed = [porter.stem(word) for word in filtered_words]\n",
+    "print(stemmed)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "31d5cd13",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2023-05-27T04:39:52.507561800Z",
+     "start_time": "2023-05-27T04:39:52.367271300Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "[nltk_data] Error loading averaged_perceptron_tagger: <urlopen error\n",
+      "[nltk_data]     [Errno 11001] getaddrinfo failed>\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[('truth', 'NN'), ('universally', 'RB'), ('acknowledged', 'VBD'), ('single', 'JJ'), ('man', 'NN'), ('possession', 'NN'), ('good', 'JJ'), ('fortune', 'NN'), ('must', 'MD'), ('want', 'VB'), ('wife', 'NN')]\n"
+     ]
+    }
+   ],
+   "source": [
+    "import nltk\n",
+    "nltk.download('averaged_perceptron_tagger')\n",
+    "\n",
+    "from nltk import pos_tag\n",
+    "pos = pos_tag(filtered_words)\n",
+    "print(pos)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0e2dcdc1",
+   "metadata": {},
+   "source": [
+    "# Conclusion Text preprocessing is an important first step for any NLP application. In this lab we discussed several popular preprocessing approaches using NLTK: lowercase, removing punctuation, tokenization, stopword filtering, stemming, and part-of-speech tagger."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "1f1b6070",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2023-05-27T04:39:52.508561500Z",
+     "start_time": "2023-05-27T04:39:52.493083900Z"
+    }
+   },
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "31775e24",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2023-05-27T04:39:52.567709700Z",
+     "start_time": "2023-05-27T04:39:52.507561800Z"
+    }
+   },
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
